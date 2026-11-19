@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 })
 export class RegistroComponent {
   registroForm: FormGroup;
+  listaClientes: any[] = []; // Aquí guardaremos los datos
 
   constructor(private fb: FormBuilder) {
     this.registroForm = this.fb.group({
@@ -22,9 +23,10 @@ export class RegistroComponent {
 
   enviarFormulario() {
     if (this.registroForm.valid) {
-      console.log('Formulario enviado:', this.registroForm.value);
-      alert('Cliente registrado correctamente');
-      this.registroForm.reset(); // Limpia el formulario después de enviar
+      // Guardamos una copia de los datos en la lista
+      this.listaClientes.push(this.registroForm.value);
+      // Limpiamos el formulario
+      this.registroForm.reset();
     }
   }
 }
