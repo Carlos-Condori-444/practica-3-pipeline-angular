@@ -1,1 +1,32 @@
-<p>registro works!</p>
+<div class="form-container">
+  <h2>Registro de Cliente</h2>
+  
+  <form [formGroup]="registroForm" (ngSubmit)="enviarFormulario()">
+    
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input type="text" formControlName="nombre">
+      <small class="error" *ngIf="registroForm.get('nombre')?.invalid && registroForm.get('nombre')?.touched">
+        El nombre es obligatorio y debe tener al menos 3 letras.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>Correo:</label>
+      <input type="email" formControlName="correo">
+      <small class="error" *ngIf="registroForm.get('correo')?.invalid && registroForm.get('correo')?.touched">
+        Ingrese un correo válido.
+      </small>
+    </div>
+
+    <div class="form-group">
+      <label>Teléfono (9 dígitos):</label>
+      <input type="text" formControlName="telefono">
+      <small class="error" *ngIf="registroForm.get('telefono')?.invalid && registroForm.get('telefono')?.touched">
+        El teléfono debe tener exactamente 9 números.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="registroForm.invalid">Registrar</button>
+  </form>
+</div>
