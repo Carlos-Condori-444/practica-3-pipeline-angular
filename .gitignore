@@ -1,1 +1,13 @@
-node_modules
+# Dependencias
+/node_modules
+
+# Builds
+/dist
+/out-tsc
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de entorno (¡Muy importante para no subir contraseñas!)
+.env
