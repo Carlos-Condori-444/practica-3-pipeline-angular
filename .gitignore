@@ -11,3 +11,4 @@ Thumbs.db
 
 # Archivos de entorno (¡Muy importante para no subir contraseñas!)
 .env
+.angular
