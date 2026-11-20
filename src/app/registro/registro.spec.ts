@@ -54,4 +54,30 @@ it('debe invalidar el formulario si el nombre tiene menos de 3 letras', () => {
   expect(component.registroForm.invalid).toBe(true);
 });
 
+
+  it('El formulario es inválido cuando está vacío', () => {
+    expect(component.registroForm.valid).toBeFalsy();
+    
+    expect(component.registroForm.get('nombre')?.valid).toBeFalsy();
+    expect(component.registroForm.get('correo')?.valid).toBeFalsy();
+    expect(component.registroForm.get('telefono')?.valid).toBeFalsy();
+  });
+
+  it('El formulario es válido cuando se ingresan datos correctos', () => {
+    component.registroForm.setValue({
+      nombre: 'Juan Perez',
+      correo: 'juan@test.com',
+      telefono: '987654321'
+    });
+
+    expect(component.registroForm.valid).toBeTruthy();
+
+    component.enviarFormulario();
+    
+    expect(component.listaClientes.length).toBe(1);
+    expect(component.listaClientes[0].nombre).toBe('Juan Perez');
+    
+    expect(component.registroForm.valid).toBeFalsy(); 
+  });
+
 });
