@@ -30,3 +30,30 @@ jobs:
 
       - name: Generar build
         run: npm run build
+
+  deploy:
+    name: Despliegue a produccion
+    needs: ci
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo
+        uses: actions/checkout@v4
+
+      - name: Configurar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar dependencias
+        run: npm install
+
+      - name: Generar build
+        run: npm run build
+
+      - name: Publicar carpeta dist por FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          local-dir: ./dist/practica-angular/browser/
+          server-dir: /
